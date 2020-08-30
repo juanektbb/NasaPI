@@ -1,0 +1,41 @@
+.CarouselBox{}
+.CarouselBox h1{
+  font-size: 30px;
+  font-family: 'Helvetica';
+  text-align: center;
+  color: #fff;
+  margin: 25px auto 10px;
+}
+.Carousel{
+  width: 90%;
+  margin: 0 auto;
+  border: 2px solid #fff;
+  display: flex;
+  justify-content: center;
+  background-color: #fff;
+  flex-wrap: wrap;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.CarouselItem{
+  border: 1px solid #fff;
+  flex-basis: 25%;
+  height: 322px;
+  position:relative;
+}
+.with_video{
+  flex-basis: 50%;
+}
+.CarouselItem img{
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+}
+.CarouselItem .date{
+  z-index: 2;
+  position: absolute;
+  top: 4px;
+  right: 5px;
+  font-size: 10px;
+  color: pink;
+}
