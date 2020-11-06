@@ -76,7 +76,7 @@ class App extends React.Component{
         </div>
 
         <footer>
-          &copy; NasAPI 2020
+          <span>&copy; NasaPI 2020</span>
         </footer>
       </div>
     )

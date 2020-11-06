@@ -39,3 +39,17 @@
   font-size: 10px;
   color: pink;
 }
+
+@media only screen and (max-width: 1250px) {
+  .CarouselItem {
+    height: 280px;
+  }
+}
+@media only screen and (max-width: 1050px) {
+  .CarouselItem {
+    flex-basis: 33%;
+  }
+  .with_video {
+    flex-basis: 66%;
+  }
+}

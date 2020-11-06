@@ -5,12 +5,17 @@ const Gallery = (props) => {
   return(
     <div className='GalleryBox' style={{display: props.display_type}} id='GalleryBox'>
       <div className='Gallery'>
+        <div className='title'>
+          {props.content.title}
+        </div>
+
         {props.content.media_type == 'image' && <img src={props.content.url} className='' />}
         {props.content.media_type == 'video' && <iframe width="100%" height="320" src={props.content.url} frameBorder="0"></iframe>}
 
-        <div className="caption">
-          {props.content.copyright}
-        </div>
+        {props.content.copyright &&
+          <div className="caption">
+            {props.content.copyright}
+          </div>}
 
         <div className='explanation'>
           {props.content.explanation}
