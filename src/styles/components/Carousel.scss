@@ -28,7 +28,7 @@
 }
 .CarouselItem img {
   width: 100%;
-  height: 320px;
+  height: 100%;
   object-fit: cover;
 }
 .CarouselItem .date {
@@ -48,8 +48,17 @@
 @media only screen and (max-width: 1050px) {
   .CarouselItem {
     flex-basis: 33%;
+    height: 220px;
   }
   .with_video {
     flex-basis: 66%;
+  }
+}
+@media only screen and (max-width: 700px) {
+  .CarouselItem {
+    flex-basis: 50%;
+  }
+  .with_video {
+    flex-basis: 100%;
   }
 }

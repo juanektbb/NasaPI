@@ -6,13 +6,12 @@
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.9);
-  overflow: none;
+  overflow: auto;
 }
 .Gallery {
   border-radius: 8px;
   width: 800px;
-  margin: 0 auto;
-  margin-top: 50px;
+  margin: 50px auto 20px;
   background-color: #e9e9e9;
   text-align: center;
   position: relative;
@@ -46,4 +45,22 @@
   top: -12px;
   right: -35px;
   cursor: pointer;
+}
+
+@media only screen and (max-width: 900px) {
+  .Gallery {
+    width: calc(100% - 100px);
+  }
+  .Gallery img {
+    height: 100%;
+    margin: 0 auto;
+    max-height: 100%;
+    width: 100%;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .Gallery {
+    width: calc(100% - 90px);
+    margin: 20px auto;
+  }
 }
