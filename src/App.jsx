@@ -1,75 +1,85 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
+import './styles/App.scss'
 import 'regenerator-runtime/runtime'
 
 import Header from './components/Header'
 import Search from './components/Search'
+import Gallery from './components/Gallery'
 
 import Carousel from './components/Carousel'
 import CarouselItem from './components/CarouselItem'
 
-import { getPreviousDates } from './helpers.js'
-
-import './styles/App.scss'
-
-//Import custom hook
-// import useInitialState from './useInitialState';
+import { getPreviousDates } from './lib/helpers.js'
+import Nasa from './lib/Nasa'
 
 class App extends React.Component{
 
-  constructor(props){
-    super(props)
-
-    this.state = {
-      API: 'https://api.nasa.gov/planetary/apod?api_key=vhfbkYMTzBe0txwiTUatg1aMeEQVfvCsS4ECps1h',
-      API_STRUCT: [],
-      last_int: 2
-    }
+  state = {
+    API_STRUCT: [],
+    last_loaded: 2,
+    nasa: new Nasa(),
+    element_for_gallery: {},
+    gallery_display: 'none',
+    n_record_load: 10
   }
 
   componentDidMount(){
     this.load_records(10)
   }
 
-  load_more_images = () => {
-    this.load_records(5)
-  }
-
-  load_API_STRUCT = async (this_link) => {
-   const response = await fetch(this_link)
-   const data = await response.json()
-   return data
-  }
-
   load_records = async (total) => {
-    for(var i = this.state.last_int; i < this.state.last_int + total; i++){
-      let query_date = '&date=' + getPreviousDates(i)
-      let data_this_date = await this.load_API_STRUCT(this.state.API + query_date)
+    for(var i = this.state.last_loaded; i < this.state.last_loaded + total; i++){
+      let query_date = getPreviousDates(i)
+      let data_this_date = await this.state.nasa.makeCall(query_date)
 
       this.setState({
         API_STRUCT: [].concat(this.state.API_STRUCT, data_this_date)
       })
     }
 
-    this.setState({ last_int: this.state.last_int + total + 1 })
+    this.setState({ last_loaded: this.state.last_loaded + total + 1 })
+  }
+
+  handleElementClick = (element) => {
+    this.setState({
+      element_for_gallery: element,
+      gallery_display: 'block'
+    })
+  }
+
+  closeGallery = () => {
+    this.setState({ gallery_display: 'none' })
   }
 
   render(){
     return(
-    <div className="App">
-      <Header />
-      <Search today={getPreviousDates(1)}/>
+      <div className="App">
+        <Header />
+
+        <Gallery
+          display_type={this.state.gallery_display}
+          content={this.state.element_for_gallery}
+          closeGallery={this.closeGallery} />
+
+        <Search 
+          today={getPreviousDates(1)}
+          handleElementClick={this.handleElementClick} />
+
         <Carousel>
           {this.state.API_STRUCT.map((item, i) =>
-            <CarouselItem key={i} {...item} /> //Unstructure the code
+            <CarouselItem key={i} element={item} handleElementClick={this.handleElementClick} />
           )}
         </Carousel>
-      <div className="fancy-button-box">
-        <button className="fancy-button" onClick={this.load_more_images}>Load more...</button>
+
+        <div className="fancy-button-box">
+          <button className="fancy-button" onClick={() => this.load_records(this.state.n_record_load)}>Load more...</button>
+        </div>
+
+        <footer>
+          &copy; NasAPI 2020
+        </footer>
       </div>
-      <footer>
-        &copy; NasAPI 2020
-      </footer>
-    </div>)
+    )
   }
 
 }

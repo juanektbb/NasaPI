@@ -1,14 +1,14 @@
-.HighlightBox{
+.HighlightBox {
   margin: 0px auto 50px;
 }
-.HighlightBox h1{
+.HighlightBox h1 {
   font-size: 30px;
-  font-family: 'Helvetica';
+  font-family: "Helvetica";
   text-align: center;
   color: #fff;
   margin: 0 auto 10px;
 }
-.Highlight{
+.Highlight {
   width: 50%;
   margin: 0 auto;
   padding: 10px;
@@ -20,12 +20,12 @@
   height: 342px;
   position: relative;
 }
-.Highlight img{
+.Highlight img {
   width: 100%;
   height: 320px;
   object-fit: cover;
 }
-.Highlight .date{
+.Highlight .date {
   z-index: 2;
   position: absolute;
   top: 19px;
@@ -33,9 +33,6 @@
   font-size: 10px;
   color: pink;
 }
-.ClickableArea{
+.ClickableArea {
   padding: 25px;
-}
-.ClickableArea:hover{
-  background-color: rgba(0,0,0,0.5);
 }

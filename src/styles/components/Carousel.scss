@@ -1,12 +1,11 @@
-.CarouselBox{}
-.CarouselBox h1{
-  font-size: 30px;
-  font-family: 'Helvetica';
+.CarouselBox h1 {
+  font-size: 20px;
+  font-family: "Helvetica";
   text-align: center;
   color: #fff;
-  margin: 25px auto 10px;
+  margin: 20px auto;
 }
-.Carousel{
+.Carousel {
   width: 90%;
   margin: 0 auto;
   border: 2px solid #fff;
@@ -17,21 +16,22 @@
   border-radius: 8px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-.CarouselItem{
+.CarouselItem {
   border: 1px solid #fff;
   flex-basis: 25%;
   height: 322px;
-  position:relative;
+  position: relative;
+  cursor: pointer;
 }
-.with_video{
+.with_video {
   flex-basis: 50%;
 }
-.CarouselItem img{
+.CarouselItem img {
   width: 100%;
   height: 320px;
   object-fit: cover;
 }
-.CarouselItem .date{
+.CarouselItem .date {
   z-index: 2;
   position: absolute;
   top: 4px;

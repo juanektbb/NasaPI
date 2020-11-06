@@ -1,9 +1,8 @@
 import React from 'react'
-import Highlight from './Highlight'
-
-import Gallery from './Gallery'
-
 import '../styles/components/Search.scss'
+
+import Highlight from './Highlight'
+import Nasa from '../lib/Nasa'
 
 class Search extends React.Component{
 
@@ -11,33 +10,24 @@ class Search extends React.Component{
     super(props)
     this.state = {
       date: this.props.today,
-      api_today: {},
-      gallery_view: 'none'
+      nasa: new Nasa(),
+      api_today: {}
     }
   }
 
   //PASS A DATE AND GET API CONTENT
-  get_api_content = (on_this_date) => {
-    fetch("https://api.nasa.gov/planetary/apod?api_key=vhfbkYMTzBe0txwiTUatg1aMeEQVfvCsS4ECps1h&date=" + on_this_date)
-      .then(res => res.json())
-      .then(
-        (result) => {
-          this.setState({ api_today: result })
-        },
-        (error) => {
-          this.setState({ api_today: {} })
-        })
+  get_api_content = async (on_this_date) => {
+    const response = await this.state.nasa.makeCall(on_this_date)
+
+    if(!response['error']){
+      this.setState({ api_today: response })
+    }
   }
 
   //HANDLE CHANGE OF DATE BUTTON
   handleChange = e => {
     this.get_api_content(e.target.value)
     this.setState({ date: e.target.value })
-  }
-
-  //HANDLE OPEN GALLERY
-  handleClick = e => {
-    this.setState({ gallery_view: 'block' })
   }
 
   //COMPONENT WAS LOADED AND RENDERED, FILL IT UP NOW
@@ -55,26 +45,8 @@ class Search extends React.Component{
         </div>
 
         <Highlight
-          passwork={this.handleClick}
-          copyright={this.state.api_today.copyright}
-          date={this.state.api_today.date}
-          explanation={this.state.api_today.explanation}
-          media_type={this.state.api_today.media_type}
-          service_version={this.state.api_today.service_version}
-          title={this.state.api_today.title}
-          url={this.state.api_today.url}
-        />
-
-        <Gallery
-          display_type={this.state.gallery_view}
-          copyright={this.state.api_today.copyright}
-          date={this.state.api_today.date}
-          explanation={this.state.api_today.explanation}
-          media_type={this.state.api_today.media_type}
-          service_version={this.state.api_today.service_version}
-          title={this.state.api_today.title}
-          url={this.state.api_today.url}
-        />
+          handleElementClick={this.props.handleElementClick}
+          content={this.state.api_today}/>
 
         <hr />
       </div>
