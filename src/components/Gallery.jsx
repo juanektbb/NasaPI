@@ -13,9 +13,9 @@ const Gallery = (props) => {
         {props.content.media_type == 'video' && <iframe width="100%" height="320" src={props.content.url} frameBorder="0"></iframe>}
 
         {props.content.copyright &&
-          <div className="caption">
-            {props.content.copyright}
-          </div>}
+        <div className="caption">
+          {props.content.copyright}
+        </div>}
 
         <div className='explanation'>
           {props.content.explanation}

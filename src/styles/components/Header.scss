@@ -1,17 +1,17 @@
-header{
+header {
   background-color: #212121;
   display: flex;
   justify-content: space-between;
   padding: 0 10px;
 }
-header .logo img{
+header .logo img {
   height: 80px;
   padding-top: 4px;
 }
-header .fancy-text{
+header .fancy-text {
   line-height: 80px;
   font-size: 16px;
 }
-header .fancy-text span{
+header .fancy-text span {
   color: #e59892;
 }

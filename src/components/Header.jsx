@@ -7,7 +7,7 @@ const Header = () => {
   return(
     <header>
       <div className='logo'>
-        <img src={logo} alt="Nasa logo"/>
+        <img src={logo} alt="Nasa logo" />
       </div>
       <div className='fancy-text'>
         Discover <span>Nasa</span>'s top photographs

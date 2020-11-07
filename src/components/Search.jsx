@@ -10,6 +10,7 @@ class Search extends React.Component{
     super(props)
     this.state = {
       date: this.props.today,
+      loading: true,
       nasa: new Nasa(),
       api_today: {}
     }
@@ -20,14 +21,21 @@ class Search extends React.Component{
     const response = await this.state.nasa.makeCall(on_this_date)
 
     if(!response['error']){
-      this.setState({ api_today: response })
+      this.setState({ 
+        loading: false,
+        api_today: response 
+      })
     }
   }
 
   //HANDLE CHANGE OF DATE BUTTON
   handleChange = e => {
+    this.setState({ 
+      loading: true,
+      date: e.target.value 
+    })
     this.get_api_content(e.target.value)
-    this.setState({ date: e.target.value })
+    
   }
 
   //COMPONENT WAS LOADED AND RENDERED, FILL IT UP NOW
@@ -39,14 +47,15 @@ class Search extends React.Component{
     return(
       <div className="SearchBox">
         <div className='Search'>
-          <form>
-            <input type='date' name='date' onChange={this.handleChange} value={this.state.date}/>
-          </form>
+          <input type='date' name='date' onChange={this.handleChange} value={this.state.date} />
         </div>
 
-        <Highlight
-          handleElementClick={this.props.handleElementClick}
-          content={this.state.api_today}/>
+        {this.state.loading ?
+          <div className="Loading">Loading...</div> :
+          <Highlight
+            handleElementClick={this.props.handleElementClick}
+            content={this.state.api_today}
+          />}
 
         <hr />
       </div>
